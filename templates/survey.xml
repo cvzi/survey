@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * templates/survey.xml
+ *
+ *       survey
+ *
+ *  survey is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  survey is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with survey; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ *  For questions contact
+ *  cuzi@openmail.cc
+ *
+ * @copyright 2010 cuzi
+ * @author cuzi@openmail.cc
+ * @package survey
+ * @version 2.0
+ * @license http://gnu.org/copyleft/gpl.html GNU GPL
+ *
+-->
+
+<root>
+
+  <set name="maleTeacherSurvey" title="Lehrer">
+      <foreach>maleteachers_questions</foreach>
+      <a>maleteachers_teachers</a>
+      <result>maleteachers_stats</result>
+      <votes>1</votes>
+  </set>
+
+  <set name="femaleTeacherSurvey" title="Lehrerin">
+      <foreach>femaleteachers_questions</foreach>
+      <a>femaleteachers_teachers</a>
+      <result>femaleteachers_stats</result>
+      <votes>1</votes>
+  </set>
+<!--
+  <set name="allStudentsSurvey">
+      <foreach>allstudents_questions</foreach>
+      <a>allstudents_students</a>
+      <result>allstudents_stats</result>
+      <votes>1</votes>
+  </set>-->
+
+  <set name="maleStudentsSurvey"  title="Schüler">
+      <foreach>malestudents_questions</foreach>
+      <a>malestudents_students</a>
+      <result>malestudents_stats</result>
+      <votes>1</votes>
+  </set>
+
+  <set name="femaleStudentsSurvey" title="Schülerin">
+      <foreach>femalestudents_questions</foreach>
+      <a>femalestudents_students</a>
+      <result>femalestudents_stats</result>
+      <votes>1</votes>
+  </set>
+
+  <set name="combination_students" combination="true" title="Schüler/Schülerin">
+      <foreach>combination_students_questions</foreach>
+      <a>combination_students_male</a>
+      <a>combination_students_female</a>
+      <result>combination_students_stats</result>
+      <votes>1</votes>
+  </set>
+
+  <set name="combination_teachers" combination="true" title="Lehrer/Lehrerin">
+      <foreach>combination_teachers_questions</foreach>
+      <a>combination_teachers_male</a>
+      <a>combination_teachers_female</a>
+      <result>combination_teachers_stats</result>
+      <votes>1</votes>
+  </set>
+
+</root>

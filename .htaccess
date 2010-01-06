@@ -1,0 +1,47 @@
+RewriteEngine On
+#generated with generate_htaccess.php using navigation.xml
+
+RewriteRule ^login$ ?q=login [qsappend]
+RewriteRule ^login/$ ?q=login [qsappend]
+
+RewriteRule ^about$ ?q=about [qsappend]
+RewriteRule ^about/$ ?q=about [qsappend]
+
+RewriteRule ^cronjob$ ?q=cronjob [qsappend]
+RewriteRule ^cronjob/$ ?q=cronjob [qsappend]
+
+RewriteRule ^logout$ ?q=logout [qsappend]
+RewriteRule ^logout/$ ?q=logout [qsappend]
+
+RewriteRule ^survey$ ?q=survey [qsappend]
+RewriteRule ^survey/$ ?q=survey [qsappend]
+
+RewriteRule ^single$ ?q=single [qsappend]
+RewriteRule ^single/$ ?q=single [qsappend]
+
+RewriteRule ^stats$ ?q=stats [qsappend]
+RewriteRule ^stats/$ ?q=stats [qsappend]
+
+RewriteRule ^stats3$ ?q=stats3 [qsappend]
+RewriteRule ^stats3/$ ?q=stats3 [qsappend]
+
+RewriteRule ^members$ ?q=members [qsappend]
+RewriteRule ^members/$ ?q=members [qsappend]
+
+RewriteRule ^admin$ ?q=admin [qsappend]
+RewriteRule ^admin/$ ?q=admin [qsappend]
+
+
+#Vulnerable Files and Dirs
+
+RewriteRule ^generate_htaccess.php$ index.php
+RewriteRule ^config.php$ index.php
+RewriteRule ^templates.* index.php
+RewriteRule ^class.* index.php
+RewriteRule ^include.* index.php
+RewriteRule ^navigation.xml$ index.php
+RewriteRule ^smarty.* index.php
+RewriteRule ^License$ index.php
+RewriteRule ^statscache.* index.php
+RewriteRule ^dbbackup.* index.php
+#generated with generate_htaccess.php

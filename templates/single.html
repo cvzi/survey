@@ -1,0 +1,109 @@
+{**
+* templates/single.html
+*
+*       survey
+*
+*  survey is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  survey is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with survey; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+*  For questions contact
+*  cuzi@openmail.cc
+*
+* @copyright 2010 cuzi
+* @author cuzi@openmail.cc
+* @package survey
+* @version 2.0
+* @license http://gnu.org/copyleft/gpl.html GNU GPL
+*}
+
+<div style="text-align:center;">
+    <a href="{$pages.single.link_get}position={if $autoProceed}{$position-2}{else}{$position-1}{/if}"><img src="{$baseurl}images/icons/left.png" alt="" /></a>
+    <img src="{$baseurl}images/icons/notepad.png" alt="" />
+{if $data}
+    <a href="{$pages.single.link_get}position={if $autoProceed}{$position}{else}{$position+1}{/if}"><img src="{$baseurl}images/icons/right.png" alt="" /></a>
+{/if}
+</div>
+
+<br />
+<br />
+
+
+
+{if $data}
+<div style="margin:auto;text-align:center;">
+<form action="{$pages.single.link}" method="post">
+        <h2>{$data.title}</h2>
+
+        <br />
+
+        <p class="questionholder">{$data.question.text}</p>
+        <br />
+        <p>
+        {if $data.combination}
+            <input type="hidden" name="combination" value="1" />
+        {assign var=i value=0}
+        {foreach item=aset from=$data.a}
+            <select name="aids[]">
+                <option value="0"> - auswählen - </option>
+                    {foreach item=a from=$aset}
+                    <option {if $a.id == $data.question.status_array[$i]}selected="selected"{/if} value="{$a.id}">{$a.text|escape}</option>
+                    {/foreach}
+            </select>
+        {assign var=i value="`$i+1`"}
+        {/foreach}
+
+
+        {else}
+            <select name="aid">
+                <option value="0"> - auswählen - </option>
+                {foreach item=a from=$data.a}
+                <option {if $a.id == $data.question.status}selected="selected"{/if} value="{$a.id}">{$a.text|escape}</option>
+                {/foreach}
+            </select>
+        {/if}
+
+
+
+        </p>
+        <br />
+        <p>
+
+            <input type="hidden" name="qid" value="{$data.question.id}" />
+            <input type="hidden" name="vn" value="{$data.question.vote_number}" />
+            <input type="hidden" name="name" value="{$data.name}" />
+            <input type="hidden" name="position" value="{$position}" />
+            <input type="submit" name="save" value="Speichern / Weiter" />
+        </p>
+
+
+</form>
+
+</div>
+{else}
+<h2>Das war die letzte Frage</h2>
+{/if}
+
+<br />
+<br />
+<div style="border:1px solid Black; padding:5px; ">
+<form action="{$pages.single.link}" method="post">
+<input class="settings" {if $autoProceed}checked="checked"{/if} type="checkbox" title="Automatisch weiterleiten" name="autoProceed" value="1" id="autoProceed" /> <label for="autoProceed" id="label_autoProceed">Nach dem Beantworten einer Frage automatisch zur nächsten Frage weiterleiten</label>
+<br />
+<br />
+<input class="settings" {if $onlyOpen}checked="checked"{/if} type="checkbox" title="Beantwortete ausblenden" name="onlyOpen" value="1" id="onlyOpen" /> <label for="onlyOpen" id="label_onlyOpen">Nur unbeantwortete Frage anzeigen</label>
+</form>
+</div>
+<br />
+<a href="{$pages.survey.link}#force">Fragenübersicht</a>
+

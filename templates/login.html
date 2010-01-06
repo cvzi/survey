@@ -1,0 +1,86 @@
+{**
+* templates/login.html
+*
+*       survey
+*
+*  survey is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  survey is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with survey; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+*  For questions contact
+*  cuzi@openmail.cc
+*
+* @copyright 2010 cuzi
+* @author cuzi@openmail.cc
+* @package survey
+* @version 2.0
+* @license http://gnu.org/copyleft/gpl.html GNU GPL
+*}
+
+{if $user->get('group') < 1}
+
+<div style="text-align:center;">
+    <img src="{$baseurl}images/icons/locked.png" alt="Login benötigt" />
+</div>
+
+<h2>Login</h2>
+
+<form action="{$pages.login.link}" method="post" autocomplete="off">
+    <div>
+        <br />
+        <span class="inputdec" id="otp_dec" title="Doppelklick zur versteckten Eingabe">Dein Schlüssel</span>
+        <input type="text" name="otp" id="otp" value="" tabindex="1" autocomplete="off" spellcheck="false"/>
+        <input type="submit" name="do" value="Go!"  tabindex="2"  />
+    </div>
+</form>
+
+<br />
+
+<br />
+
+Ihr könnt euch natürlich mehrmals mit eurem Passwort anmelden ;)
+<br />
+Es müssen also nicht alle Awards auf einmal gewählt werden.
+<br />
+
+
+{/if}
+
+<div style="text-align:center;">
+    {if $user->get('group') < 1}
+
+    {else}
+    <img src="{$baseurl}images/icons/home.png" alt="Login benötigt" />
+
+        <br />
+        <br />
+        <br />
+        <p>
+            Das ist die Homepage
+        </p>
+        <br />
+        <br />
+        <br />
+        <input style="float:none; display:inline;" type="button" value="Zur Umfrage" onclick="document.location.href='{$pages.survey.link}';" />
+
+    {/if}
+
+        <br />
+        <br />
+        <br />
+        <h2>Fragen?</h2>
+        <p>
+            Schreib rechts einen Kommentar oder frag auf:
+        </p>
+        <a href="http://www.facebook.com/home.php?sk=group_166248943396729"><img src="{$baseurl}images/icons/facebook.png" alt="Facebook" /></a>
+</div>

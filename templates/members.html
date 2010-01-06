@@ -1,0 +1,112 @@
+{**
+* templates/members.html
+*
+*       survey
+*
+*  survey is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  survey is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with survey; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+*  For questions contact
+*  cuzi@openmail.cc
+*
+* @copyright 2010 cuzi
+* @author cuzi@openmail.cc
+* @package survey
+* @version 2.0
+* @license http://gnu.org/copyleft/gpl.html GNU GPL
+*}
+
+<div style="text-align:center;">
+    <img src="{$baseurl}images/icons/users.png" alt="" />
+</div>
+
+<br />
+<br />
+
+<h2>
+    Personen
+</h2>
+
+Hier sind alle Personen mit dem aktuellen Status aufgelistet.
+<br />
+Jede Person sollte {$total} mal abstimmen.
+<br />
+<br />
+Die Sortierung kann im Tabellenkopf verändert werden.
+<br />
+<br />
+<input type="checkbox" id="hideOnComplete" /> vollständige verstecken
+<br />
+
+
+<table border="1" id="members_table">
+    <tr>
+        <th><a class="changesorting" rel="Sortierung" title="Klicken um alphabetisch zu sortieren. Erneutes Klicken sortiert in umgekehrter Reihenfolge ;)" href="{$page.link_get}order_by=name">Name:</a></th>
+        <th><a class="changesorting" rel="Sortierung" title="Klicken um nach Reststimmen zu sortieren. Erneutes Klicken sortiert in umgekehrter Reihenfolge ;)" href="{$page.link_get}order_by=status">Status:</a></th>
+    </tr>
+    {assign var=total_questions value=0}
+    {assign var=total_replies value=0}
+
+    {assign var=total_person value=0}
+    {assign var=total_complete value=0}
+
+    {foreach item=member from=$everyone}
+
+    {assign var=total_questions value="`$total_questions+$total`"}
+    {assign var=total_replies value="`$total_replies+$member.sets`"}
+
+    {assign var=total_person value="`$total_person+1`"}
+    {if $total == $member.sets}
+    {assign var=total_complete value="`$total_complete+1`"}
+    {/if}
+
+
+    <tr class="{if $total == $member.sets}complete{/if}">
+        <td class="{$member.id}">{$member.surname|escape}, {$member.name|replace:$member.surname:""|escape}</td>
+        <td>{if $total == $member.sets}alle{else}{$member.sets} von {$total}{/if} beantwortet</td>
+    </tr>
+    {/foreach}
+
+</table>
+
+
+<br />
+<br />
+<table border="1">
+    <tr>
+        <td>
+            Status Fragen:
+        </td>
+        <td>
+            {$total_replies}/{$total_questions}
+        </td>
+        <td>
+            {math equation="x/y*100" x=$total_replies y=$total_questions  format="%.2f"}%
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Status Personen:
+        </td>
+        <td>
+            {$total_complete}/{$total_person}
+        </td>
+        <td>
+            {math equation="x/y*100" x=$total_complete y=$total_person  format="%.2f"}%
+        </td>
+    </tr>
+
+</table>
+
+

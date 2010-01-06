@@ -1,0 +1,110 @@
+{**
+* templates/survey.html
+*
+*       survey
+*
+*  survey is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  survey is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with survey; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+*  For questions contact
+*  cuzi@openmail.cc
+*
+* @copyright 2010 cuzi
+* @author cuzi@openmail.cc
+* @package survey
+* @version 2.0
+* @license http://gnu.org/copyleft/gpl.html GNU GPL
+*}
+
+<div style="text-align:center;">
+    <img src="{$baseurl}images/icons/remove.png" alt="" />
+    <img src="{$baseurl}images/icons/user-admin.png" alt="" />
+    <img src="{$baseurl}images/icons/add.png" alt="" />
+</div>
+
+<br />
+<br />
+
+<h2>
+    Umfrage
+</h2>
+
+<a href="{$pages.single.link}">Jeweils nur eine Frage anzeigen</a>
+
+
+<div style="display:none;" id="youareie">
+<br />
+<br />
+<h1>Mit dem Internet Explorer funktioniert die Fragenübersicht momentan nicht! Benutze am besten Firefox oder Opera.</h1>
+
+<a href="http://www.mozilla.com/de/firefox/"><img src="{$baseurl}images/get_firefox.png" alt="Firefox installieren" /></a>
+<a href="http://www.opera.com/"><img src="{$baseurl}images/get_opera.gif" alt="Opera installieren" /></a>
+</div>
+
+
+<br />
+<br />
+
+Fragen nach dem Beantworten verstecken, damit immer die Frage oben beantwortet werden kann: 
+
+<br />
+<br />
+<input type="checkbox" id="hideOnAnswer" /> Fragen verstecken
+<br />
+
+<div>
+{foreach key=name item=set from=$everythingForVoting}
+
+{if !$set.combination}
+<select style="display:none; " class="universal_select" id="universal_select_{$name|escape}">
+    <option value="0"> - auswählen - </option>
+    {foreach item=a from=$set.a}
+    <option value="{$a.id}">{$a.text|escape}</option>
+    {/foreach}
+</select>
+{else}
+<div class="universal_select_combination">
+{foreach item=aset from=$set.a}
+<select style="display:none; " class="universal_select_combination_select" rel="{$name|escape}">
+    <option value="0"> - auswählen - </option>
+    {foreach item=a from=$aset}
+    <option value="{$a.id}">{$a.text|escape}</option>
+    {/foreach}
+</select>
+{/foreach}    
+</div>
+{/if}
+
+{/foreach}
+</div>
+
+
+<form action="#" method="post">
+    <table id="ask">
+
+        {foreach key=name item=set from=$everythingForVoting}
+
+        {foreach item=question from=$set.questions}
+        <tr class="question{if $set.combination} combination{/if}">
+            <td class="questionholder {$question.id} {$question.vote_number}">{$question.text|escape|replace:"\n":"<br />"}</td>
+            <td class="selectholder {$name|escape}"></td>
+            <td class="statusholder">{if $set.combination}{foreach item=status from=$question.status_array}{$status},{/foreach}{else}{$question.status}{/if}</td>
+        </tr>
+        {/foreach}
+
+        {/foreach}
+
+    </table>
+
+</form>

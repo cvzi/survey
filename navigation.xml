@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ *
+ * navigation.xml
+ *
+ *       survey
+ *
+ *  survey is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  survey is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with survey; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ *  For questions contact
+ *  cuzi@openmail.cc
+ *
+ * @copyright 2010 cuzi
+ * @author cuzi@openmail.cc
+ * @package survey
+ * @version 2.0
+ * @license http://gnu.org/copyleft/gpl.html GNU GPL
+ *
+
+-->
+
+<root>
+
+    <base>http://localhost/survey/</base>
+
+    <shortindex>http://bit.ly/survey54846</shortindex>
+
+    <path>/xampp/htdocs/survey/</path>
+
+    <htaccess>q</htaccess>
+
+    <templates>templates/</templates>
+    <php>include/</php>
+
+    <frame>index.html</frame>
+    <mobile_frame>mobile_index.html</mobile_frame>
+
+    <page param="q" name="login" index="1">login.php</page>
+
+    <page param="q" name="about" group="0">about.php</page>
+    <page param="q" name="cronjob" group="0">cronjob.php</page>
+
+    <page param="q" name="logout" group="1">logout.php</page>
+    <page param="q" name="survey" group="1">survey.php</page>
+    <page param="q" name="single" group="1">single.php</page>
+
+    <page param="q" name="stats" group="2">stats.php</page>
+    <page param="q" name="stats3" group="2">stats3.php</page>
+    <page param="q" name="members" group="2">members.php</page>
+
+    <page param="q" name="admin" group="5">admin.php</page>
+
+
+    <json param="q" name="comment" group="0">ajax.comment.php</json>
+    <json param="q" name="getcomments" group="0">ajax.getcomments.php</json>
+
+    <json param="q" name="generatestats" group="2">ajax.generatestats.php</json>
+    <json param="q" name="chart" group="2">ajax.chart.php</json>
+    <json param="q" name="chart2" group="2">ajax.chart2.php</json>
+
+    <json param="q" name="vote" group="1">ajax.vote.php</json>
+    <json param="q" name="votecombi" group="1">ajax.votecombi.php</json>
+    <json param="q" name="removevote" group="1">ajax.removevote.php</json>
+    <json param="q" name="settings" group="1">ajax.settings.php</json>
+
+    <json param="q" name="memberinfo" group="5">ajax.memberinfo.php</json>
+
+
+    <public>
+        <file>favicon.gif</file>
+        <file>favicon.png</file>
+        <file>favicon.ico</file>
+        <file>index.php</file>
+        <file>css.php</file>
+        <file>json.php</file>
+        <file>main.js</file>
+        <file>memberinfo.js</file>
+        <file>stats.js</file>
+        <file>reset.php</file>
+        <file>mootools-core-1.3.js</file>
+        <file>mootools-more-1.3.js</file>
+        <file>images</file>
+    </public>
+
+
+
+</root>

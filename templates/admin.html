@@ -1,0 +1,209 @@
+{**
+* templates/admin.html
+*
+*       survey
+*
+*  survey is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  survey is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with survey; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+*  For questions contact
+*  cuzi@openmail.cc
+*
+* @copyright 2010 cuzi
+* @author cuzi@openmail.cc
+* @package survey
+* @version 2.0
+* @license http://gnu.org/copyleft/gpl.html GNU GPL
+*}
+
+<div style="text-align:center;">
+    <img src="{$baseurl}images/icons/configuration.png" alt="Einstellungen" />
+
+    <br />
+    <br />
+    <h2>Admin</h2>
+    <br />
+    <br />
+</div>
+
+
+<div>"<span style="font-style:italic">{$surveyfile}</span>" wird benutzt!
+    {if $surveyfileContent}
+    <div style="padding:5px; border:2px Black Solid; background:White; color:Black; font-family:monospace; white-space:pre-wrap; max-height:200px; overflow:auto;">{$surveyfileContent|escape}</div>
+    {/if}
+</div>
+
+<br />
+<ul class="square">
+    <li>
+        <a href="{$pages.admin.link_get}do=createTables">Tabellen erstellen (if not exist)</a>
+    </li>
+    <li>
+        <a href="{$pages.admin.link_get}do=createTriggers">Tabellentrigger erstellen</a>
+    </li>
+    <li>
+        <a href="{$pages.admin.link_get}do=optimize">Tabellen optimieren</a>
+    </li>
+</ul>
+<br />
+<hr />
+<br />
+<h2>Users</h2>
+<br />
+<a onclick="var d = prompt('Das Voting läuft bis:','Montag, 31.01.11'); this.href += '&amp;date='+escape(d); return true;" href="{$pages.admin.link_get}do=showPasswords">Schlüssel/Passwörter anzeigen</a>
+{if $memberpasswords}
+<div style="padding:5px; border:2px Black Solid; background:White; color:Black; max-height:500px; overflow:auto;">
+    Administratoren werden nicht aufgelistet.
+
+    <table border="1" id="members_table">
+        {foreach item=member from=$memberpasswords}
+        <tr>
+            <td colspan="2">{$shortindex}</td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>&#8199; {$member.name}</td>
+        </tr>
+        <tr>
+            <td>Schlüssel:</td>
+            <td>&#8199; {$member.password}&#8199;</td>
+        </tr>
+        <tr>
+            <td>Das Voting läuft bis:</td>
+            <td>&#8199; {$smarty.get.date|escape}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr /></td>
+        </tr>
+        {/foreach}
+
+
+    </table>
+    Ende
+
+
+</div>
+{/if}
+
+<br />
+<br />
+<hr />
+<br />
+
+<h2>Seiten</h2>
+
+<br />
+Abstimmung {if $surveyonline}online{else}offline{/if}
+<br />
+<a href="{$pages.admin.link_get}do=toggleSurvey">an/aus</a>
+
+<br />
+
+<br />
+
+Statistik {if $statsonline}online{else}offline{/if}
+<br />
+<a href="{$pages.admin.link_get}do=toggleStats">an/aus</a>
+
+
+<br />
+
+<br />
+
+<br />
+<hr />
+<br />
+
+<h2>Kommentare löschen</h2>
+
+<br />
+
+{if $allcomments}
+<div style="overflow:auto;max-height:350px;">
+{foreach item=comment from=$allcomments}
+{strip}
+<div class="chatmessage" id="chatmessage_{$comment.id}">
+    <div class="headline">
+        <a onclick="return confirm('Wirklich löschen?');" href="{$pages.admin.link_get}do=deleteComment&amp;id={$comment.id}"><img src="{$baseurl}images/icons/delete.png" title="Kommentare löschen" alt="Löschen"/></a>
+        {$comment.displayname} - {$comment.time|date_format:"%d.%m.%y %H:%M:%S"}
+    </div>
+    <div class="post">{$comment.text|escape|clickable_links|nl2br}</div>
+</div>
+<br />
+{/strip}
+{/foreach}
+</div>
+{/if}
+
+
+<br />
+
+<br />
+
+
+{if $cache_array}
+<br />
+<hr />
+<br />
+
+<h2>Cache</h2>
+<br />
+<a href="{$pages.admin.link_get}do=unblock">Blockierung aufheben</a>
+<br />
+<br />
+<a href="{$pages.admin.link_get}do=cleanupcache">Cache aufräumen</a>
+<br />
+<br />
+Insgesamt:
+{$total_cache_size|file_size}
+
+<br />
+
+
+<ul class="square" style="overflow:auto;max-height:150px; border:5px #E3ECF8 solid">
+{foreach item=file from=$cache_array}
+   <li style="{cycle values="background:#E3ECF8, "}" title="{$file.filename} - {$file.time|date_format:"%A, %d. %B %Y um %H:%M Uhr und %S Sekunden"}">{$file.time|date_format:"%R - %d.%m.%y"} - {$file.size|file_size} - {$file.hash}</li>
+{/foreach}
+</ul>
+
+{/if}
+
+<br />
+
+
+<br />
+
+
+<br />
+<hr />
+<br />
+
+<h2>DB Backups</h2>
+<br />
+<a href="{$pages.admin.link_get}do=backupdatabase">Backup erstellen</a>
+<br />
+Insgesamt:
+{$total_dbbackup_size|file_size}
+
+<br />
+
+
+<ul class="square" style="overflow:auto;max-height:150px; border:5px #E3ECF8 solid">
+{foreach item=file from=$dbbackup_array}
+   <li style="{cycle values="background:#E3ECF8, "}" title="{$file.time|date_format:"%A, %d. %B %Y um %H:%M Uhr und %S Sekunden"}">{$file.time|date_format:"%R - %d.%m.%y"} - {$file.size|file_size}</li>
+{/foreach}
+</ul>
+
+
+<br />

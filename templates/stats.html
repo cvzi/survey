@@ -1,0 +1,82 @@
+{**
+* templates/stats.html
+*
+*       survey
+*
+*  survey is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  survey is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with survey; if not, write to the Free Software
+*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+*  For questions contact
+*  cuzi@openmail.cc
+*
+* @copyright 2010 cuzi
+* @author cuzi@openmail.cc
+* @package survey
+* @version 2.0
+* @license http://gnu.org/copyleft/gpl.html GNU GPL
+*}
+
+<div style="text-align:center;">
+    <img src="{$baseurl}images/icons/statistic.png" alt="" />
+</div>
+
+<br />
+<br />
+
+<h2>
+    Statistik
+</h2>
+
+    <p>
+        {if $howold}
+        Letzte Aktualisierung der Statistik vor {$howold} Minuten
+        <br />Cache gelesen in {$timeOfGeneration|string_format:"%.2f"}ms
+        {else}
+        <br />Statistik generiert in {$timeOfGeneration|string_format:"%.2f"}ms
+        {/if}
+    </p>
+
+    {foreach item=stat key=title from=$stats}
+    <br />
+    <table class="stats" border="1">
+        <tr>
+            <th id="stats_name_{$stat[1].name}" style="text-align:center;" colspan="3">{$title}</th>
+        </tr>
+        <tr>
+            <th>Frage</th>
+            <th>Name</th>
+            <th>Stimmenanzahl</th>
+        </tr>
+        {foreach item=question from=$stat}
+        <tr class="{cycle name="trs" values="odd,even"}">
+            <td class="for_id {$question.for_id}">{$question.for_text|escape}</td>
+            <td>
+                <ul>
+                    {assign var=i value=0}
+                    {foreach item=votes key=teacher from=$question.sets}
+                    {if $votes}
+                    <li class="{cycle advance=false name="trs" values="odd,even"} {if $i%2 != 0}dark{/if}"><span style="display:inline-block; width:300px;">{$teacher}</span> {math equation="x/y*100" x=$votes y=$question.total format="%.2f"}%</li>
+                    {assign var=i value="`$i+1`"}
+                    {/if}
+                    {/foreach}
+                </ul>
+            </td>
+            <td>{$question.total}</td>
+        </tr>
+        {/foreach}
+
+
+    </table>
+
+                    {/foreach}

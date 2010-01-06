@@ -1,0 +1,40 @@
+RewriteEngine On
+#generated with generate_htaccess.php using navigation.xml
+
+RewriteRule ^login$ ?q=login [qsappend]
+RewriteRule ^login/$ ?q=login [qsappend]
+
+RewriteRule ^about$ ?q=about [qsappend]
+RewriteRule ^about/$ ?q=about [qsappend]
+
+RewriteRule ^logout$ ?q=logout [qsappend]
+RewriteRule ^logout/$ ?q=logout [qsappend]
+
+RewriteRule ^survey$ ?q=survey [qsappend]
+RewriteRule ^survey/$ ?q=survey [qsappend]
+
+RewriteRule ^stats$ ?q=stats [qsappend]
+RewriteRule ^stats/$ ?q=stats [qsappend]
+
+RewriteRule ^admin$ ?q=admin [qsappend]
+RewriteRule ^admin/$ ?q=admin [qsappend]
+
+
+#Vulnerable Files and Dirs
+
+RewriteRule ^class.* index.php
+RewriteRule ^design.html$ index.php
+RewriteRule ^empty.html$ index.php
+RewriteRule ^favicon.gif$ index.php
+RewriteRule ^generate_htaccess.php$ index.php
+RewriteRule ^htaccess.txt$ index.php
+RewriteRule ^include.* index.php
+RewriteRule ^License$ index.php
+RewriteRule ^logo.gif$ index.php
+RewriteRule ^logo.xcf$ index.php
+RewriteRule ^navigation.xml$ index.php
+RewriteRule ^nbproject.* index.php
+RewriteRule ^smarty.* index.php
+RewriteRule ^templates.* index.php
+RewriteRule ^class.* index.php
+#generated with generate_htaccess.php
